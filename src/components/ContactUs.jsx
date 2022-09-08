@@ -38,7 +38,8 @@ const ContactUs = () => {
         e.preventDefault()
         if(contact.name && contact.email && contact.msg){
             try {
-                const res = await sendRequest("/contact")
+
+                const res = await sendRequest("https://blog-app-api-server.herokuapp.com/api/contact")
             console.log(res);
             if(res){
                 window.alert("Your Message send successfully")

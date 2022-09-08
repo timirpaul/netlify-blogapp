@@ -12,7 +12,8 @@ const BlogCard = ({ id, title, description, username, categories, createdAt, pho
     const isLoggedIn = useSelector((state) => state.isLoggedIn)
     console.log(isLoggedIn);
 
-    const imgAddressBackend = "http://localhost:5000/images/"
+    // const imgAddressBackend = "http://localhost:5000/images/"
+    const imgAddressBackend = "https://blog-app-api-server.herokuapp.com/images/"
     const navigate = useNavigate()
     console.log(isUser);
     const handleEdit = (e) => {

@@ -19,7 +19,8 @@ const SinglePost = () => {
     const [iserror, setIserror] = useState("")
 
     const navigate = useNavigate()
-    const imgAddressBackend = "http://localhost:5000/images/"
+    // const imgAddressBackend = "http://localhost:5000/images/"
+    const imgAddressBackend = "https://blog-app-api-server.herokuapp.com/images/"
     
     
     
@@ -86,7 +87,7 @@ const SinglePost = () => {
                         :
 
                         <Container maxWidth="sm" >
-                            {posts.username === localStorage.getItem("username") &&
+                            {isLoggedIn && posts.username === localStorage.getItem("username") &&
                                 <Box display='flex'>
                                     <IconButton onClick={handleEdit} sx={{ marginRight: "auto" }} >
 
