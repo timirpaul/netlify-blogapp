@@ -9,11 +9,15 @@ import { useSelector } from "react-redux";
 
 const BlogCard = ({ id, title, description, username, categories, createdAt, photo, isUser }) => {
 
+        const apiURL = "https://blog-app-api-server.herokuapp.com/api"
+        const imgAPIURL = "https://blog-app-api-server.herokuapp.com/images/"
+
+        // const apiURL = "http://localhost:5000/api"
+        // const imgAPIURL = "http://localhost:5000/images/"
+
     const isLoggedIn = useSelector((state) => state.isLoggedIn)
     console.log(isLoggedIn);
 
-    // const imgAddressBackend = "http://localhost:5000/images/"
-    const imgAddressBackend = "https://blog-app-api-server.herokuapp.com/images/"
     const navigate = useNavigate()
     console.log(isUser);
     const handleEdit = (e) => {
@@ -21,7 +25,7 @@ const BlogCard = ({ id, title, description, username, categories, createdAt, pho
     }
     const handleDelete = async () => {
         try {
-            const res = await axios.delete('/posts/' + id ,{data:{username:username}}) //use "{data:{}}"for send data backend 
+            const res = await axios.delete(`${apiURL}/posts/${id}` ,{data:{username:username}}) //use "{data:{}}"for send data backend 
             window.alert(res.data.msg)
             navigate('/myblogs')     
         } catch (error) {
@@ -64,7 +68,7 @@ const BlogCard = ({ id, title, description, username, categories, createdAt, pho
                 <CardMedia
                     component="img"
                     height="194"
-                    image={imgAddressBackend + photo}
+                    image={imgAPIURL + photo}
                     alt="Post img"
                 />
                 <CardContent>

@@ -5,6 +5,9 @@ import axios from "axios"
 import { useNavigate } from 'react-router-dom';
 
 const ContactUs = () => {
+       const apiURL = "https://blog-app-api-server.herokuapp.com/api"
+
+    //    const apiURL = "http://localhost:5000/api"
 
     const navigate = useNavigate()
 
@@ -18,7 +21,7 @@ const ContactUs = () => {
         setContact({...contact, [event.target.name]:event.target.value})
     }
     const sendRequest = async (url) => {
-        
+        console.log(url);
         try {
             const res = await axios.post(url, {
                 name : contact.name,
@@ -30,7 +33,7 @@ const ContactUs = () => {
             return resdata;
         } catch (error) {
             console.log(error);
-            window.alert(error.response.data.msg);
+            window.alert(error.message);
         }
     }
 
@@ -39,11 +42,11 @@ const ContactUs = () => {
         if(contact.name && contact.email && contact.msg){
             try {
 
-                const res = await sendRequest("https://blog-app-api-server.herokuapp.com/api/contact")
+                const res = await sendRequest(`${apiURL}/contact`)
             console.log(res);
             if(res){
                 window.alert("Your Message send successfully")
-                // navigate("/")
+                navigate("/")
             }
             
             } catch (error) {

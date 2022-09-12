@@ -22,6 +22,9 @@ const TextArea = styled(TextareaAutosize)`
 
 
 const EditPost = () => {
+           const apiURL = "https://blog-app-api-server.herokuapp.com/api"
+
+        //    const apiURL = "http://localhost:5000/api"
     const {id} = useParams()
     console.log(id);
 
@@ -57,7 +60,7 @@ const EditPost = () => {
         }
     }
     useEffect(()=>{
-        getApiData('/posts/'+ id )
+        getApiData(`${apiURL}/posts/`+ id )
     },[id])
     
 
@@ -92,7 +95,7 @@ const EditPost = () => {
 
             if (post.title && post.description  && post.categories && post.username) {
 
-            const res = await sendRequest("/posts/"+ id)
+            const res = await sendRequest(`${apiURL}/posts/`+ id)
 
             console.log(res.updatedPost);
             

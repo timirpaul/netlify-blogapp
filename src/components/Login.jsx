@@ -9,6 +9,9 @@ import { useNavigate } from "react-router-dom";
 
 
 const Login = () => {
+    const apiURL = "https://blog-app-api-server.herokuapp.com/api"
+
+    // const apiURL = "http://localhost:5000/api"
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -35,8 +38,9 @@ const Login = () => {
     }
 
 
-    const sendRequest = async (type = '/login') => {
+    const sendRequest = async (type = `${apiURL}/login`) => {
         const url = `${type}`
+        console.log(url);
         try {
             const res = await axios.post(url, {
                 name: input.name,
@@ -60,7 +64,7 @@ const Login = () => {
         try {
 
             if (isSignup) {
-                const res = await sendRequest("/signup")
+                const res = await sendRequest(`${apiURL}/signup`)
                 if (res) {
                     // localStorage.setItem("username", res.user.name)
                     window.alert(res.msg)

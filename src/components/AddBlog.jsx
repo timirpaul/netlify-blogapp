@@ -21,6 +21,11 @@ const TextArea = styled(TextareaAutosize)`
 `
 
 const AddBlog = () => {
+
+    const apiURL = "https://blog-app-api-server.herokuapp.com/api"
+   
+    // const apiURL = "http://localhost:5000/api"
+    
     const navigate = useNavigate()
 
     const [post, setPost] = useState({
@@ -87,8 +92,8 @@ const AddBlog = () => {
             if (post.title && post.description && post.photo && post.categories && post.username) {
 
                 const photoData = await getImg()
-                const photoUpload = await axios.post(`/upload`, photoData)
-                const res = await sendRequest("/posts")
+                const photoUpload = await axios.post(`${apiURL}/upload`, photoData)
+                const res = await sendRequest(`${apiURL}/posts`)
 
 
 

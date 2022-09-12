@@ -10,6 +10,10 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Profile = () => {
+    const apiURL = "https://blog-app-api-server.herokuapp.com/api"
+
+    // const apiURL = "http://localhost:5000/api"
+
     const isLoggedIn = useSelector((state) => state.isLoggedIn)
     console.log(isLoggedIn);
 
@@ -37,7 +41,7 @@ const Profile = () => {
         }
     }
     useEffect(() => {
-        getApiData("users/" + userid)
+        getApiData(`${apiURL}/users/` + userid)
     }, [userid])
 
     return (

@@ -8,6 +8,9 @@ import { useSelector } from 'react-redux';
 import { Container } from '@mui/material';
 
 const Myblogs = () => {
+    const apiURL = "https://blog-app-api-server.herokuapp.com/api"
+
+    // const apiURL = "http://localhost:5000/api"
 
     const username = localStorage.getItem("username")
 
@@ -25,6 +28,14 @@ const Myblogs = () => {
             const resData = res.data
 
             console.log(resData);
+            const sort = resData.sort((a,b)=>{
+                var keyA = new Date(a.createdAt) 
+                var keyB = new Date(b.createdAt)
+                if(keyA < keyB) return 1;
+                if(keyA > keyB) return -1;
+                return 0;
+            })
+            // console.log(sort);
 
             setPosts(resData);
         } catch (error) {
@@ -36,7 +47,7 @@ const Myblogs = () => {
 
 
     useEffect(() => {
-        getApiData(`/posts/allposts/?username=${username}`)
+        getApiData(`${apiURL}/posts/allposts/?username=${username}`)
     }, [username])
 
 

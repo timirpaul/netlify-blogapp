@@ -11,6 +11,10 @@ import { Select ,MenuItem ,InputLabel ,Container} from '@mui/material';
 
 const AllPosts = () => {
 
+    const apiURL = "https://blog-app-api-server.herokuapp.com/api"
+
+    // const apiURL = "http://localhost:5000/api"
+
 
     //Category start
     const [Input,setInput] = useState('')
@@ -39,6 +43,14 @@ const AllPosts = () => {
             const resData = res.data
 
             console.log(resData);
+            const sort = resData.sort((a,b)=>{
+                var keyA = new Date(a.createdAt) 
+                var keyB = new Date(b.createdAt)
+                if(keyA < keyB) return 1;
+                if(keyA > keyB) return -1;
+                return 0;
+            })
+            // console.log(sort);
 
             setPosts(resData);
         } catch (error) {
@@ -50,10 +62,10 @@ const AllPosts = () => {
 
 
     useEffect(() => {
-        getApiData("posts/allposts")
+        getApiData(`${apiURL}/posts/allposts`)
     }, [])
     useEffect(() => {
-        getApiData(`posts/allposts/?category=${postCategory}`)
+        getApiData(`${apiURL}/posts/allposts/?category=${postCategory}`)
     }, [postCategory])
 
 
@@ -73,7 +85,7 @@ const AllPosts = () => {
                                     
                                     name="category"
                                     onChange={handleInputChange}
-                                >
+                                > 
                                     <MenuItem value={""}>All Categories</MenuItem>
                                     <MenuItem value={"music"}>Music</MenuItem>
                                     <MenuItem value={"blog"}>Blog</MenuItem>
