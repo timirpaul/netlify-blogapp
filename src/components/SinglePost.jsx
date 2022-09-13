@@ -9,6 +9,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Box, Container, CardMedia, Typography, IconButton, Card } from '@mui/material';
 import Comments from './Comments';
+import AddComment from './AddComment';
 
 
 
@@ -21,6 +22,7 @@ const SinglePost = () => {
     // const imgAPIURL = "http://localhost:5000/images/"
 
     const [posts, setPosts] = useState([])
+    const [comments, setComments] = useState([])
     const [iserror, setIserror] = useState("")
 
     const navigate = useNavigate()
@@ -61,10 +63,28 @@ const SinglePost = () => {
     }
 
 
+    const getApiComment = async (url) => {
+        try {
+            console.log(url);
+            const res = await axios.get(url)
+            const resData = res.data
+
+            console.log(resData);
+
+            setComments(resData);
+        } catch (error) {
+            console.log(url);
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        getApiComment(`${apiURL}/comment/` + id)
+    }, [])
+
     useEffect(() => {
         getApiData(`${apiURL}/posts/` + id)
     }, [])
-
 
     const handleEdit = (e) => {
         navigate(`/edit/${posts._id}`)
@@ -90,7 +110,7 @@ const SinglePost = () => {
     }
 
 
-
+    console.log(comments.length);
     return (
         <>
             <div >
@@ -135,13 +155,38 @@ const SinglePost = () => {
                                 </Typography>
 
 
-                                
+
                             </Container>
 
+
+                            {isLoggedIn &&
+
+                                <AddComment
+                                postId={id}
+                                />
+
+                            }
+
+                        
                             
-                           
-                            {/* <Comments/> */}
-                              
+                            {comments.length === 0 ?
+                            <Card sx={{
+                                maxWidth: '40%', margin: 'auto', mt: 2, padding: 2, boxShadow: '5px 5px 10px #ccc',
+                                ":hover": { boxShadow: '10px 20px 30px #ccc' }
+                            }}>
+                            <Typography>No Comments</Typography> 
+                            </Card>
+                            :
+                            comments.map((comments, index) => (
+                                <Comments
+                                    id={comments._id}
+                                    username={comments.username}
+                                    comment={comments.comment}
+                                />
+
+                            ))}
+                            
+
                         </>
 
                 }
