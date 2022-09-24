@@ -17,6 +17,7 @@ const Login = () => {
     const navigate = useNavigate()
 
     const isLoggedIn = useSelector((state) => state.isLoggedIn)
+
     console.log(isLoggedIn);
 
 
@@ -83,9 +84,12 @@ const Login = () => {
                     window.alert(res.msg)
                     console.log(res)
                     dispatch(authActions.login())
+                   
+                    
 
 
                     navigate("/")
+                    
                 }
             }
         } catch (error) {

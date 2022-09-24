@@ -5,7 +5,9 @@ import axios from "axios"
 
 import BlogCard from './BlogCard';
 import { useSelector } from 'react-redux';
-import { Container } from '@mui/material';
+import { Container } from '@mui/material'
+import Pagination from './Pagination';
+;
 
 const Myblogs = () => {
     const apiURL = "https://blog-app-api-server.herokuapp.com/api"
@@ -21,21 +23,30 @@ const Myblogs = () => {
 
     const [posts, setPosts] = useState([])
     const [iserror, setIserror] = useState("")
+    // pagination
+    const [currentPage,setCurrentPage] = useState(1)
+    const [postPerPage,setPostPerPage] = useState(5)    
+
+    const lastPostIndex = currentPage * postPerPage 
+    const firstPostIndex = lastPostIndex - postPerPage 
+
+    const currentPost = posts.slice(firstPostIndex , lastPostIndex)
+
 
     const getApiData = async (url) => {
         try {
             const res = await axios.get(url)
             const resData = res.data
 
-            console.log(resData);
-            const sort = resData.sort((a,b)=>{
+            resData.sort((a,b)=>{
                 var keyA = new Date(a.createdAt) 
                 var keyB = new Date(b.createdAt)
                 if(keyA < keyB) return 1;
                 if(keyA > keyB) return -1;
                 return 0;
             })
-            // console.log(sort);
+            console.log(resData);
+            
 
             setPosts(resData);
         } catch (error) {
@@ -60,9 +71,10 @@ const Myblogs = () => {
                         :
                         <Container container  >
 
-                            {posts.map((posts, index) => (
+                            {currentPost.map((posts, index) => (
 
                                 <BlogCard
+                                    key={index}
                                     isUser={localStorage.getItem("username") === posts.username}
                                     id={posts._id}
                                     title={posts.title}
@@ -74,9 +86,16 @@ const Myblogs = () => {
                                     categories={posts.categories}
 
                                 />
+                                
 
 
                             ))}
+                            <Pagination 
+                                totalPosts={posts.length} 
+                                postPerPage={postPerPage}
+                                setCurrentPage={setCurrentPage}
+                                />
+                          
                         </Container>
                 }
             </div>

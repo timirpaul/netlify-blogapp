@@ -16,6 +16,7 @@ const BlogCard = ({ id, title, description, username, categories, createdAt, pho
         // const imgAPIURL = "http://localhost:5000/images/"
 
     const isLoggedIn = useSelector((state) => state.isLoggedIn)
+    
     console.log(isLoggedIn);
 
     const navigate = useNavigate()

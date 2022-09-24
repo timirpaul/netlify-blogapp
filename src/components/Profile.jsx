@@ -15,6 +15,7 @@ const Profile = () => {
     // const apiURL = "http://localhost:5000/api"
 
     const isLoggedIn = useSelector((state) => state.isLoggedIn)
+    
     console.log(isLoggedIn);
 
     const navigate = useNavigate()
