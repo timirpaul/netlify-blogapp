@@ -9,7 +9,8 @@ import { useNavigate } from "react-router-dom";
 
 
 const Login = () => {
-    const apiURL = "https://blog-app-api-server.herokuapp.com/api"
+    const apiURL = "https://blogs-app-pwvr.onrender.com/api";
+//     const apiURL = "https://blog-app-api-server.herokuapp.com/api"
 
     // const apiURL = "http://localhost:5000/api"
 
