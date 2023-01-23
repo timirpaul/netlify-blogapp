@@ -15,8 +15,10 @@ import AddComment from './AddComment';
 
 
 const SinglePost = () => {
-    const apiURL = "https://blog-app-api-server.herokuapp.com/api"
-    const imgAPIURL = "https://blog-app-api-server.herokuapp.com/images/"
+    const apiURL = "https://blogs-app-pwvr.onrender.com/api";
+  const imgAPIURL = "https://blogs-app-pwvr.onrender.com/images/";
+//     const apiURL = "https://blog-app-api-server.herokuapp.com/api"
+//     const imgAPIURL = "https://blog-app-api-server.herokuapp.com/images/"
 
     // const apiURL = "http://localhost:5000/api"
     // const imgAPIURL = "http://localhost:5000/images/"
